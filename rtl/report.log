@@ -1,0 +1,1302 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.64+68 (git sha1 413169663, g++ 13.3.0-6ubuntu2~24.04.1 -fPIC -O3)
+
+-- Executing script file `synth.ys' --
+
+1. Executing Verilog-2005 frontend: core/UMC-8000.v
+Parsing Verilog input from `core/UMC-8000.v' to AST representation.
+Generating RTLIL representation for module `\UMC_8000'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: core/controller.v
+Parsing Verilog input from `core/controller.v' to AST representation.
+Generating RTLIL representation for module `\controller'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: core/datapath.v
+Parsing Verilog input from `core/datapath.v' to AST representation.
+Generating RTLIL representation for module `\datapath'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: core/pc.v
+Parsing Verilog input from `core/pc.v' to AST representation.
+Generating RTLIL representation for module `\pc'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: core/mod/adder.v
+Parsing Verilog input from `core/mod/adder.v' to AST representation.
+Generating RTLIL representation for module `\adder'.
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: core/mod/mux.v
+Parsing Verilog input from `core/mod/mux.v' to AST representation.
+Generating RTLIL representation for module `\demux'.
+Generating RTLIL representation for module `\mux'.
+Successfully finished Verilog frontend.
+
+7. Executing Verilog-2005 frontend: core/mod/reg.v
+Parsing Verilog input from `core/mod/reg.v' to AST representation.
+Generating RTLIL representation for module `\register'.
+Successfully finished Verilog frontend.
+
+8. Executing HIERARCHY pass (managing design hierarchy).
+
+8.1. Analyzing design hierarchy..
+Top module:  \UMC_8000
+Used module:     \pc
+Used module:     \controller
+Used module:     \datapath
+Used module:         \adder
+Used module:         \demux
+Used module:         \register
+Used module:         \mux
+
+8.2. Analyzing design hierarchy..
+Top module:  \UMC_8000
+Used module:     \pc
+Used module:     \controller
+Used module:     \datapath
+Used module:         \adder
+Used module:         \demux
+Used module:         \register
+Used module:         \mux
+Removed 0 unused modules.
+
+9. Executing PROC pass (convert processes to netlists).
+
+9.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+9.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 2 switch rules as full_case in process $proc$core/mod/reg.v:6$14 in module register.
+Marked 1 switch rules as full_case in process $proc$core/pc.v:7$2 in module pc.
+Marked 1 switch rules as full_case in process $proc$core/controller.v:13$1 in module controller.
+Removed a total of 0 dead cases.
+
+9.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 2 redundant assignments.
+Promoted 0 assignments to connections.
+
+9.4. Executing PROC_INIT pass (extract init attributes).
+
+9.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst in `\register.$proc$core/mod/reg.v:6$14'.
+Found async reset \rst in `\pc.$proc$core/pc.v:7$2'.
+
+9.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~4 debug messages>
+
+9.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\register.$proc$core/mod/reg.v:6$14'.
+     1/1: $0\dout[7:0]
+Creating decoders for process `\pc.$proc$core/pc.v:7$2'.
+     1/2: $0\halt[0:0]
+     2/2: $0\pc[7:0]
+Creating decoders for process `\controller.$proc$core/controller.v:13$1'.
+     1/1: $0\code[5:0]
+
+9.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\controller.\code' from process `\controller.$proc$core/controller.v:13$1'.
+
+9.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\register.\dout' using process `\register.$proc$core/mod/reg.v:6$14'.
+  created $adff cell `$procdff$32' with positive edge clock and positive level reset.
+Creating register for signal `\pc.\pc' using process `\pc.$proc$core/pc.v:7$2'.
+  created $adff cell `$procdff$37' with positive edge clock and positive level reset.
+Creating register for signal `\pc.\halt' using process `\pc.$proc$core/pc.v:7$2'.
+  created $adff cell `$procdff$42' with positive edge clock and positive level reset.
+
+9.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+9.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `\register.$proc$core/mod/reg.v:6$14'.
+Removing empty process `register.$proc$core/mod/reg.v:6$14'.
+Found and cleaned up 2 empty switches in `\pc.$proc$core/pc.v:7$2'.
+Removing empty process `pc.$proc$core/pc.v:7$2'.
+Found and cleaned up 1 empty switch in `\controller.$proc$core/controller.v:13$1'.
+Removing empty process `controller.$proc$core/controller.v:13$1'.
+Cleaned up 4 empty switches.
+
+9.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module register.
+<suppressed ~2 debug messages>
+Optimizing module mux.
+Optimizing module demux.
+Optimizing module adder.
+Optimizing module pc.
+<suppressed ~4 debug messages>
+Optimizing module datapath.
+Optimizing module controller.
+<suppressed ~1 debug messages>
+Optimizing module UMC_8000.
+
+10. Executing OPT pass (performing simple optimizations).
+
+10.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module register.
+Optimizing module mux.
+Optimizing module demux.
+Optimizing module adder.
+Optimizing module pc.
+Optimizing module datapath.
+Optimizing module controller.
+Optimizing module UMC_8000.
+
+10.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\register'.
+Computing hashes of 4 cells of `\register'.
+Finding duplicate cells in `\register'.
+Finding identical cells in module `\mux'.
+Computing hashes of 1 cells of `\mux'.
+Finding duplicate cells in `\mux'.
+Finding identical cells in module `\demux'.
+Computing hashes of 4 cells of `\demux'.
+Finding duplicate cells in `\demux'.
+Computing hashes of 3 cells of `\demux'.
+Finding duplicate cells in `\demux'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `\adder'.
+Computing hashes of 1 cells of `\adder'.
+Finding duplicate cells in `\adder'.
+Finding identical cells in module `\pc'.
+Computing hashes of 11 cells of `\pc'.
+Finding duplicate cells in `\pc'.
+Computing hashes of 10 cells of `\pc'.
+Finding duplicate cells in `\pc'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `\datapath'.
+Computing hashes of 5 cells of `\datapath'.
+Finding duplicate cells in `\datapath'.
+Finding identical cells in module `\controller'.
+Computing hashes of 5 cells of `\controller'.
+Finding duplicate cells in `\controller'.
+Finding identical cells in module `\UMC_8000'.
+Computing hashes of 3 cells of `\UMC_8000'.
+Finding duplicate cells in `\UMC_8000'.
+Removed a total of 2 cells.
+
+10.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \register..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \mux..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \demux..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \adder..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \pc..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \datapath..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \controller..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \UMC_8000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~14 debug messages>
+
+10.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \register.
+  Optimizing cells in module \mux.
+  Optimizing cells in module \demux.
+  Optimizing cells in module \adder.
+  Optimizing cells in module \pc.
+  Optimizing cells in module \datapath.
+  Optimizing cells in module \controller.
+  Optimizing cells in module \UMC_8000.
+Performed a total of 0 changes.
+
+10.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\register'.
+Computing hashes of 4 cells of `\register'.
+Finding duplicate cells in `\register'.
+Finding identical cells in module `\mux'.
+Computing hashes of 1 cells of `\mux'.
+Finding duplicate cells in `\mux'.
+Finding identical cells in module `\demux'.
+Computing hashes of 3 cells of `\demux'.
+Finding duplicate cells in `\demux'.
+Finding identical cells in module `\adder'.
+Computing hashes of 1 cells of `\adder'.
+Finding duplicate cells in `\adder'.
+Finding identical cells in module `\pc'.
+Computing hashes of 10 cells of `\pc'.
+Finding duplicate cells in `\pc'.
+Finding identical cells in module `\datapath'.
+Computing hashes of 5 cells of `\datapath'.
+Finding duplicate cells in `\datapath'.
+Finding identical cells in module `\controller'.
+Computing hashes of 5 cells of `\controller'.
+Finding duplicate cells in `\controller'.
+Finding identical cells in module `\UMC_8000'.
+Computing hashes of 3 cells of `\UMC_8000'.
+Finding duplicate cells in `\UMC_8000'.
+Removed a total of 0 cells.
+
+10.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$32 ($adff) from module register (D = \din, Q = \dout).
+Adding EN signal on $procdff$42 ($adff) from module pc (D = 1'1, Q = \halt).
+Adding EN signal on $procdff$37 ($adff) from module pc (D = $add$core/pc.v:16$7_Y [7:0], Q = \pc).
+
+10.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \register..
+Finding unused cells or wires in module \mux..
+Finding unused cells or wires in module \demux..
+Finding unused cells or wires in module \adder..
+Finding unused cells or wires in module \pc..
+Finding unused cells or wires in module \datapath..
+Finding unused cells or wires in module \controller..
+Finding unused cells or wires in module \UMC_8000..
+Removed 7 unused cells and 23 unused wires.
+<suppressed ~14 debug messages>
+
+10.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module register.
+Optimizing module mux.
+Optimizing module demux.
+Optimizing module adder.
+Optimizing module pc.
+Optimizing module datapath.
+Optimizing module controller.
+Optimizing module UMC_8000.
+
+10.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+10.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \register..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \mux..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \demux..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \adder..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \pc..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \datapath..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \controller..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \UMC_8000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~8 debug messages>
+
+10.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \register.
+  Optimizing cells in module \mux.
+  Optimizing cells in module \demux.
+  Optimizing cells in module \adder.
+  Optimizing cells in module \pc.
+  Optimizing cells in module \datapath.
+  Optimizing cells in module \controller.
+  Optimizing cells in module \UMC_8000.
+Performed a total of 0 changes.
+
+10.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\register'.
+Computing hashes of 1 cells of `\register'.
+Finding duplicate cells in `\register'.
+Finding identical cells in module `\mux'.
+Computing hashes of 1 cells of `\mux'.
+Finding duplicate cells in `\mux'.
+Finding identical cells in module `\demux'.
+Computing hashes of 2 cells of `\demux'.
+Finding duplicate cells in `\demux'.
+Finding identical cells in module `\adder'.
+Computing hashes of 1 cells of `\adder'.
+Finding duplicate cells in `\adder'.
+Finding identical cells in module `\pc'.
+Computing hashes of 6 cells of `\pc'.
+Finding duplicate cells in `\pc'.
+Finding identical cells in module `\datapath'.
+Computing hashes of 5 cells of `\datapath'.
+Finding duplicate cells in `\datapath'.
+Finding identical cells in module `\controller'.
+Computing hashes of 5 cells of `\controller'.
+Finding duplicate cells in `\controller'.
+Finding identical cells in module `\UMC_8000'.
+Computing hashes of 3 cells of `\UMC_8000'.
+Finding duplicate cells in `\UMC_8000'.
+Removed a total of 0 cells.
+
+10.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+10.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \register..
+Finding unused cells or wires in module \mux..
+Finding unused cells or wires in module \demux..
+Finding unused cells or wires in module \adder..
+Finding unused cells or wires in module \pc..
+Finding unused cells or wires in module \datapath..
+Finding unused cells or wires in module \controller..
+Finding unused cells or wires in module \UMC_8000..
+
+10.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module register.
+Optimizing module mux.
+Optimizing module demux.
+Optimizing module adder.
+Optimizing module pc.
+Optimizing module datapath.
+Optimizing module controller.
+Optimizing module UMC_8000.
+
+10.16. Finished fast OPT passes. (There is nothing left to do.)
+
+11. Executing FSM pass (extract and optimize FSM).
+
+11.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+11.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+11.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+11.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \register..
+Finding unused cells or wires in module \mux..
+Finding unused cells or wires in module \demux..
+Finding unused cells or wires in module \adder..
+Finding unused cells or wires in module \pc..
+Finding unused cells or wires in module \datapath..
+Finding unused cells or wires in module \controller..
+Finding unused cells or wires in module \UMC_8000..
+
+11.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+11.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+11.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+11.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+12. Executing OPT pass (performing simple optimizations).
+
+12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module register.
+Optimizing module mux.
+Optimizing module demux.
+Optimizing module adder.
+Optimizing module pc.
+Optimizing module datapath.
+Optimizing module controller.
+Optimizing module UMC_8000.
+
+12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\register'.
+Computing hashes of 1 cells of `\register'.
+Finding duplicate cells in `\register'.
+Finding identical cells in module `\mux'.
+Computing hashes of 1 cells of `\mux'.
+Finding duplicate cells in `\mux'.
+Finding identical cells in module `\demux'.
+Computing hashes of 2 cells of `\demux'.
+Finding duplicate cells in `\demux'.
+Finding identical cells in module `\adder'.
+Computing hashes of 1 cells of `\adder'.
+Finding duplicate cells in `\adder'.
+Finding identical cells in module `\pc'.
+Computing hashes of 6 cells of `\pc'.
+Finding duplicate cells in `\pc'.
+Finding identical cells in module `\datapath'.
+Computing hashes of 5 cells of `\datapath'.
+Finding duplicate cells in `\datapath'.
+Finding identical cells in module `\controller'.
+Computing hashes of 5 cells of `\controller'.
+Finding duplicate cells in `\controller'.
+Finding identical cells in module `\UMC_8000'.
+Computing hashes of 3 cells of `\UMC_8000'.
+Finding duplicate cells in `\UMC_8000'.
+Removed a total of 0 cells.
+
+12.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \register..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \mux..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \demux..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \adder..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \pc..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \datapath..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \controller..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \UMC_8000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~8 debug messages>
+
+12.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \register.
+  Optimizing cells in module \mux.
+  Optimizing cells in module \demux.
+  Optimizing cells in module \adder.
+  Optimizing cells in module \pc.
+  Optimizing cells in module \datapath.
+  Optimizing cells in module \controller.
+  Optimizing cells in module \UMC_8000.
+Performed a total of 0 changes.
+
+12.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\register'.
+Computing hashes of 1 cells of `\register'.
+Finding duplicate cells in `\register'.
+Finding identical cells in module `\mux'.
+Computing hashes of 1 cells of `\mux'.
+Finding duplicate cells in `\mux'.
+Finding identical cells in module `\demux'.
+Computing hashes of 2 cells of `\demux'.
+Finding duplicate cells in `\demux'.
+Finding identical cells in module `\adder'.
+Computing hashes of 1 cells of `\adder'.
+Finding duplicate cells in `\adder'.
+Finding identical cells in module `\pc'.
+Computing hashes of 6 cells of `\pc'.
+Finding duplicate cells in `\pc'.
+Finding identical cells in module `\datapath'.
+Computing hashes of 5 cells of `\datapath'.
+Finding duplicate cells in `\datapath'.
+Finding identical cells in module `\controller'.
+Computing hashes of 5 cells of `\controller'.
+Finding duplicate cells in `\controller'.
+Finding identical cells in module `\UMC_8000'.
+Computing hashes of 3 cells of `\UMC_8000'.
+Finding duplicate cells in `\UMC_8000'.
+Removed a total of 0 cells.
+
+12.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \register..
+Finding unused cells or wires in module \mux..
+Finding unused cells or wires in module \demux..
+Finding unused cells or wires in module \adder..
+Finding unused cells or wires in module \pc..
+Finding unused cells or wires in module \datapath..
+Finding unused cells or wires in module \controller..
+Finding unused cells or wires in module \UMC_8000..
+
+12.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module register.
+Optimizing module mux.
+Optimizing module demux.
+Optimizing module adder.
+Optimizing module pc.
+Optimizing module datapath.
+Optimizing module controller.
+Optimizing module UMC_8000.
+
+12.9. Finished fast OPT passes. (There is nothing left to do.)
+
+13. Executing MEMORY pass.
+
+13.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+13.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+13.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+13.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+13.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+13.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \register..
+Finding unused cells or wires in module \mux..
+Finding unused cells or wires in module \demux..
+Finding unused cells or wires in module \adder..
+Finding unused cells or wires in module \pc..
+Finding unused cells or wires in module \datapath..
+Finding unused cells or wires in module \controller..
+Finding unused cells or wires in module \UMC_8000..
+
+13.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+13.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+13.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \register..
+Finding unused cells or wires in module \mux..
+Finding unused cells or wires in module \demux..
+Finding unused cells or wires in module \adder..
+Finding unused cells or wires in module \pc..
+Finding unused cells or wires in module \datapath..
+Finding unused cells or wires in module \controller..
+Finding unused cells or wires in module \UMC_8000..
+
+13.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+13.11. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+14. Executing OPT pass (performing simple optimizations).
+
+14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module register.
+Optimizing module mux.
+Optimizing module demux.
+Optimizing module adder.
+Optimizing module pc.
+Optimizing module datapath.
+Optimizing module controller.
+Optimizing module UMC_8000.
+
+14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\register'.
+Computing hashes of 1 cells of `\register'.
+Finding duplicate cells in `\register'.
+Finding identical cells in module `\mux'.
+Computing hashes of 1 cells of `\mux'.
+Finding duplicate cells in `\mux'.
+Finding identical cells in module `\demux'.
+Computing hashes of 2 cells of `\demux'.
+Finding duplicate cells in `\demux'.
+Finding identical cells in module `\adder'.
+Computing hashes of 1 cells of `\adder'.
+Finding duplicate cells in `\adder'.
+Finding identical cells in module `\pc'.
+Computing hashes of 6 cells of `\pc'.
+Finding duplicate cells in `\pc'.
+Finding identical cells in module `\datapath'.
+Computing hashes of 5 cells of `\datapath'.
+Finding duplicate cells in `\datapath'.
+Finding identical cells in module `\controller'.
+Computing hashes of 5 cells of `\controller'.
+Finding duplicate cells in `\controller'.
+Finding identical cells in module `\UMC_8000'.
+Computing hashes of 3 cells of `\UMC_8000'.
+Finding duplicate cells in `\UMC_8000'.
+Removed a total of 0 cells.
+
+14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \register..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \mux..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \demux..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \adder..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \pc..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \datapath..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \controller..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \UMC_8000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~8 debug messages>
+
+14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \register.
+  Optimizing cells in module \mux.
+  Optimizing cells in module \demux.
+  Optimizing cells in module \adder.
+  Optimizing cells in module \pc.
+  Optimizing cells in module \datapath.
+  Optimizing cells in module \controller.
+  Optimizing cells in module \UMC_8000.
+Performed a total of 0 changes.
+
+14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\register'.
+Computing hashes of 1 cells of `\register'.
+Finding duplicate cells in `\register'.
+Finding identical cells in module `\mux'.
+Computing hashes of 1 cells of `\mux'.
+Finding duplicate cells in `\mux'.
+Finding identical cells in module `\demux'.
+Computing hashes of 2 cells of `\demux'.
+Finding duplicate cells in `\demux'.
+Finding identical cells in module `\adder'.
+Computing hashes of 1 cells of `\adder'.
+Finding duplicate cells in `\adder'.
+Finding identical cells in module `\pc'.
+Computing hashes of 6 cells of `\pc'.
+Finding duplicate cells in `\pc'.
+Finding identical cells in module `\datapath'.
+Computing hashes of 5 cells of `\datapath'.
+Finding duplicate cells in `\datapath'.
+Finding identical cells in module `\controller'.
+Computing hashes of 5 cells of `\controller'.
+Finding duplicate cells in `\controller'.
+Finding identical cells in module `\UMC_8000'.
+Computing hashes of 3 cells of `\UMC_8000'.
+Finding duplicate cells in `\UMC_8000'.
+Removed a total of 0 cells.
+
+14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \register..
+Finding unused cells or wires in module \mux..
+Finding unused cells or wires in module \demux..
+Finding unused cells or wires in module \adder..
+Finding unused cells or wires in module \pc..
+Finding unused cells or wires in module \datapath..
+Finding unused cells or wires in module \controller..
+Finding unused cells or wires in module \UMC_8000..
+
+14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module register.
+Optimizing module mux.
+Optimizing module demux.
+Optimizing module adder.
+Optimizing module pc.
+Optimizing module datapath.
+Optimizing module controller.
+Optimizing module UMC_8000.
+
+14.9. Finished fast OPT passes. (There is nothing left to do.)
+
+15. Executing TECHMAP pass (map to technology primitives).
+
+15.1. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/local/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+15.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $eq.
+Using template $paramod$f3115659d5e2977ebd2cb01ff3557fc5f6187689\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $logic_and.
+Running "alumacc" on wrapper $extern:wrap:$add:Y_WIDTH=32:B_WIDTH=32:A_WIDTH=8:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:Y_WIDTH=32:B_WIDTH=32:A_WIDTH=8:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:Y_WIDTH=32:B_WIDTH=32:A_WIDTH=8:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$91f82ead1edc61e0a1452110f15ef747116b421b\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000100000 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $or.
+Running "alumacc" on wrapper $extern:wrap:$add:Y_WIDTH=8:B_WIDTH=8:A_WIDTH=8:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:Y_WIDTH=8:B_WIDTH=8:A_WIDTH=8:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:Y_WIDTH=8:B_WIDTH=8:A_WIDTH=8:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$a1bc51c02ce12ac21eb18988e83292af48ed7d72\_90_alu for cells of type $alu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001000 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001000 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~658 debug messages>
+
+16. Executing OPT pass (performing simple optimizations).
+
+16.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module register.
+Optimizing module mux.
+Optimizing module demux.
+<suppressed ~48 debug messages>
+Optimizing module adder.
+<suppressed ~36 debug messages>
+Optimizing module pc.
+<suppressed ~381 debug messages>
+Optimizing module datapath.
+Optimizing module controller.
+<suppressed ~47 debug messages>
+Optimizing module UMC_8000.
+
+16.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\register'.
+Computing hashes of 8 cells of `\register'.
+Finding duplicate cells in `\register'.
+Finding identical cells in module `\mux'.
+Computing hashes of 8 cells of `\mux'.
+Finding duplicate cells in `\mux'.
+Finding identical cells in module `\demux'.
+Computing hashes of 16 cells of `\demux'.
+Finding duplicate cells in `\demux'.
+Finding identical cells in module `\adder'.
+Computing hashes of 57 cells of `\adder'.
+Finding duplicate cells in `\adder'.
+Finding identical cells in module `\pc'.
+Computing hashes of 31 cells of `\pc'.
+Finding duplicate cells in `\pc'.
+Finding identical cells in module `\datapath'.
+Computing hashes of 5 cells of `\datapath'.
+Finding duplicate cells in `\datapath'.
+Finding identical cells in module `\controller'.
+Computing hashes of 22 cells of `\controller'.
+Finding duplicate cells in `\controller'.
+Computing hashes of 18 cells of `\controller'.
+Finding duplicate cells in `\controller'.
+<suppressed ~12 debug messages>
+Finding identical cells in module `\UMC_8000'.
+Computing hashes of 3 cells of `\UMC_8000'.
+Finding duplicate cells in `\UMC_8000'.
+Removed a total of 4 cells.
+
+16.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \register..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \mux..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \demux..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \adder..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \pc..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \datapath..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \controller..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \UMC_8000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+16.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \register.
+  Optimizing cells in module \mux.
+  Optimizing cells in module \demux.
+  Optimizing cells in module \adder.
+  Optimizing cells in module \pc.
+  Optimizing cells in module \datapath.
+  Optimizing cells in module \controller.
+  Optimizing cells in module \UMC_8000.
+Performed a total of 0 changes.
+
+16.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\register'.
+Computing hashes of 8 cells of `\register'.
+Finding duplicate cells in `\register'.
+Finding identical cells in module `\mux'.
+Computing hashes of 8 cells of `\mux'.
+Finding duplicate cells in `\mux'.
+Finding identical cells in module `\demux'.
+Computing hashes of 16 cells of `\demux'.
+Finding duplicate cells in `\demux'.
+Finding identical cells in module `\adder'.
+Computing hashes of 57 cells of `\adder'.
+Finding duplicate cells in `\adder'.
+Finding identical cells in module `\pc'.
+Computing hashes of 31 cells of `\pc'.
+Finding duplicate cells in `\pc'.
+Finding identical cells in module `\datapath'.
+Computing hashes of 5 cells of `\datapath'.
+Finding duplicate cells in `\datapath'.
+Finding identical cells in module `\controller'.
+Computing hashes of 18 cells of `\controller'.
+Finding duplicate cells in `\controller'.
+Finding identical cells in module `\UMC_8000'.
+Computing hashes of 3 cells of `\UMC_8000'.
+Finding duplicate cells in `\UMC_8000'.
+Removed a total of 0 cells.
+
+16.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+16.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \register..
+Finding unused cells or wires in module \mux..
+Finding unused cells or wires in module \demux..
+Finding unused cells or wires in module \adder..
+Finding unused cells or wires in module \pc..
+Finding unused cells or wires in module \datapath..
+Finding unused cells or wires in module \controller..
+Finding unused cells or wires in module \UMC_8000..
+Removed 20 unused cells and 248 unused wires.
+<suppressed ~24 debug messages>
+
+16.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module register.
+Optimizing module mux.
+Optimizing module demux.
+Optimizing module adder.
+Optimizing module pc.
+Optimizing module datapath.
+Optimizing module controller.
+Optimizing module UMC_8000.
+
+16.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+16.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \register..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \mux..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \demux..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \adder..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \pc..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \datapath..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \controller..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \UMC_8000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+16.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \register.
+  Optimizing cells in module \mux.
+  Optimizing cells in module \demux.
+  Optimizing cells in module \adder.
+  Optimizing cells in module \pc.
+  Optimizing cells in module \datapath.
+  Optimizing cells in module \controller.
+  Optimizing cells in module \UMC_8000.
+Performed a total of 0 changes.
+
+16.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\register'.
+Computing hashes of 8 cells of `\register'.
+Finding duplicate cells in `\register'.
+Finding identical cells in module `\mux'.
+Computing hashes of 8 cells of `\mux'.
+Finding duplicate cells in `\mux'.
+Finding identical cells in module `\demux'.
+Computing hashes of 16 cells of `\demux'.
+Finding duplicate cells in `\demux'.
+Finding identical cells in module `\adder'.
+Computing hashes of 40 cells of `\adder'.
+Finding duplicate cells in `\adder'.
+Finding identical cells in module `\pc'.
+Computing hashes of 28 cells of `\pc'.
+Finding duplicate cells in `\pc'.
+Finding identical cells in module `\datapath'.
+Computing hashes of 5 cells of `\datapath'.
+Finding duplicate cells in `\datapath'.
+Finding identical cells in module `\controller'.
+Computing hashes of 18 cells of `\controller'.
+Finding duplicate cells in `\controller'.
+Finding identical cells in module `\UMC_8000'.
+Computing hashes of 3 cells of `\UMC_8000'.
+Finding duplicate cells in `\UMC_8000'.
+Removed a total of 0 cells.
+
+16.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+16.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \register..
+Finding unused cells or wires in module \mux..
+Finding unused cells or wires in module \demux..
+Finding unused cells or wires in module \adder..
+Finding unused cells or wires in module \pc..
+Finding unused cells or wires in module \datapath..
+Finding unused cells or wires in module \controller..
+Finding unused cells or wires in module \UMC_8000..
+
+16.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module register.
+Optimizing module mux.
+Optimizing module demux.
+Optimizing module adder.
+Optimizing module pc.
+Optimizing module datapath.
+Optimizing module controller.
+Optimizing module UMC_8000.
+
+16.16. Finished fast OPT passes. (There is nothing left to do.)
+
+17. Executing OPT pass (performing simple optimizations).
+
+17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module register.
+Optimizing module mux.
+Optimizing module demux.
+Optimizing module adder.
+Optimizing module pc.
+Optimizing module datapath.
+Optimizing module controller.
+Optimizing module UMC_8000.
+
+17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\register'.
+Computing hashes of 8 cells of `\register'.
+Finding duplicate cells in `\register'.
+Finding identical cells in module `\mux'.
+Computing hashes of 8 cells of `\mux'.
+Finding duplicate cells in `\mux'.
+Finding identical cells in module `\demux'.
+Computing hashes of 16 cells of `\demux'.
+Finding duplicate cells in `\demux'.
+Finding identical cells in module `\adder'.
+Computing hashes of 40 cells of `\adder'.
+Finding duplicate cells in `\adder'.
+Finding identical cells in module `\pc'.
+Computing hashes of 28 cells of `\pc'.
+Finding duplicate cells in `\pc'.
+Finding identical cells in module `\datapath'.
+Computing hashes of 5 cells of `\datapath'.
+Finding duplicate cells in `\datapath'.
+Finding identical cells in module `\controller'.
+Computing hashes of 18 cells of `\controller'.
+Finding duplicate cells in `\controller'.
+Finding identical cells in module `\UMC_8000'.
+Computing hashes of 3 cells of `\UMC_8000'.
+Finding duplicate cells in `\UMC_8000'.
+Removed a total of 0 cells.
+
+17.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \register..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \mux..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \demux..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \adder..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \pc..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \datapath..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \controller..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \UMC_8000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+17.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \register.
+  Optimizing cells in module \mux.
+  Optimizing cells in module \demux.
+  Optimizing cells in module \adder.
+  Optimizing cells in module \pc.
+  Optimizing cells in module \datapath.
+  Optimizing cells in module \controller.
+  Optimizing cells in module \UMC_8000.
+Performed a total of 0 changes.
+
+17.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\register'.
+Computing hashes of 8 cells of `\register'.
+Finding duplicate cells in `\register'.
+Finding identical cells in module `\mux'.
+Computing hashes of 8 cells of `\mux'.
+Finding duplicate cells in `\mux'.
+Finding identical cells in module `\demux'.
+Computing hashes of 16 cells of `\demux'.
+Finding duplicate cells in `\demux'.
+Finding identical cells in module `\adder'.
+Computing hashes of 40 cells of `\adder'.
+Finding duplicate cells in `\adder'.
+Finding identical cells in module `\pc'.
+Computing hashes of 28 cells of `\pc'.
+Finding duplicate cells in `\pc'.
+Finding identical cells in module `\datapath'.
+Computing hashes of 5 cells of `\datapath'.
+Finding duplicate cells in `\datapath'.
+Finding identical cells in module `\controller'.
+Computing hashes of 18 cells of `\controller'.
+Finding duplicate cells in `\controller'.
+Finding identical cells in module `\UMC_8000'.
+Computing hashes of 3 cells of `\UMC_8000'.
+Finding duplicate cells in `\UMC_8000'.
+Removed a total of 0 cells.
+
+17.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+17.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \register..
+Finding unused cells or wires in module \mux..
+Finding unused cells or wires in module \demux..
+Finding unused cells or wires in module \adder..
+Finding unused cells or wires in module \pc..
+Finding unused cells or wires in module \datapath..
+Finding unused cells or wires in module \controller..
+Finding unused cells or wires in module \UMC_8000..
+
+17.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module register.
+Optimizing module mux.
+Optimizing module demux.
+Optimizing module adder.
+Optimizing module pc.
+Optimizing module datapath.
+Optimizing module controller.
+Optimizing module UMC_8000.
+
+17.9. Finished fast OPT passes. (There is nothing left to do.)
+
+18. Printing statistics.
+
+=== register ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        5 wires
+       19 wire bits
+        5 public wires
+       19 public wire bits
+        5 ports
+       19 port bits
+        8 cells
+        8   $_DFFE_PN0P_
+
+=== mux ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        4 wires
+       25 wire bits
+        4 public wires
+       25 public wire bits
+        4 ports
+       25 port bits
+        8 cells
+        8   $_MUX_
+
+=== demux ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        4 wires
+       25 wire bits
+        4 public wires
+       25 public wire bits
+        4 ports
+       25 port bits
+       16 cells
+       16   $_MUX_
+
+=== adder ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       18 wires
+       60 wire bits
+        3 public wires
+       24 public wire bits
+        3 ports
+       24 port bits
+       40 cells
+       17   $_AND_
+        8   $_OR_
+       15   $_XOR_
+
+=== pc ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       13 wires
+      113 wire bits
+        5 public wires
+       12 public wire bits
+        4 ports
+       11 port bits
+       28 cells
+        9   $_AND_
+        9   $_DFFE_PN0P_
+        3   $_NOT_
+        7   $_XOR_
+
+=== datapath ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       14 wires
+       70 wire bits
+       14 public wires
+       70 public wire bits
+        8 ports
+       22 port bits
+        5 submodules
+        1   adder
+        2   demux
+        1   mux
+        1   register
+
+=== controller ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       20 wires
+       67 wire bits
+       10 public wires
+       28 public wire bits
+        8 ports
+       20 port bits
+       18 cells
+        4   $_MUX_
+        6   $_NOT_
+        8   $_OR_
+
+=== UMC_8000 ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       13 wires
+       46 wire bits
+       13 public wires
+       46 public wire bits
+        8 ports
+       41 port bits
+        3 submodules
+        1   controller
+        1   datapath
+        1   pc
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+      134 UMC_8000
+       18 controller
+       40   adder
+       16   demux
+        8   mux
+        8   register
+       28 pc
+
+        +----------Count including submodules.
+        | 
+       95 wires
+      450 wire bits
+       62 public wires
+      274 public wire bits
+       48 ports
+      212 port bits
+        - memories
+        - memory bits
+        - processes
+      134 cells
+       26   $_AND_
+       17   $_DFFE_PN0P_
+       44   $_MUX_
+        9   $_NOT_
+       16   $_OR_
+       22   $_XOR_
+        3 submodules
+        1   controller
+        1   datapath
+        1   pc
+
+19. Executing CHECK pass (checking for obvious problems).
+Checking module register...
+Checking module mux...
+Checking module demux...
+Checking module adder...
+Checking module pc...
+Checking module datapath...
+Checking module controller...
+Checking module UMC_8000...
+Found and reported 0 problems.
+
+20. Executing Verilog backend.
+
+20.1. Executing BMUXMAP pass.
+
+20.2. Executing DEMUXMAP pass.
+Dumping module `\UMC_8000'.
+Dumping module `\adder'.
+Dumping module `\controller'.
+Dumping module `\datapath'.
+Dumping module `\demux'.
+Dumping module `\mux'.
+Dumping module `\pc'.
+Dumping module `\register'.
+
+End of script. Logfile hash: 0258aff606, time: 0.09s, user: 0.06s, system: 0.04s, MEM: 24.01 MB peak
+Yosys 0.64+68 (git sha1 413169663, g++ 13.3.0-6ubuntu2~24.04.1 -fPIC -O3)
+Time spent: 18% 1x techmap (0 sec), 15% 12x opt_clean (0 sec), ...

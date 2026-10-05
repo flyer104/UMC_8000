@@ -1,0 +1,276 @@
+$date
+	Mon Oct  5 14:10:22 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module comp_tb $end
+$var wire 1 ! sum_out $end
+$var wire 1 " sum_in $end
+$var wire 1 # sum_en $end
+$var wire 1 $ mem_write $end
+$var wire 8 % mem_wdata [7:0] $end
+$var wire 1 & mem_in $end
+$var wire 6 ' mem_addr [5:0] $end
+$var wire 1 ( is_end $end
+$var reg 1 ) clk $end
+$var reg 8 * instru [7:0] $end
+$var reg 8 + mem_rdata [7:0] $end
+$var reg 1 , rst $end
+$scope module controller $end
+$var wire 8 - instru [7:0] $end
+$var wire 1 ! sum_out $end
+$var wire 1 " sum_in $end
+$var wire 1 # sum_en $end
+$var wire 2 . opcode [1:0] $end
+$var wire 1 $ mem_write $end
+$var wire 1 & mem_in $end
+$var wire 6 / mem_addr [5:0] $end
+$var wire 1 ( is_end $end
+$var reg 6 0 code [5:0] $end
+$upscope $end
+$scope module datapath $end
+$var wire 1 ) clk $end
+$var wire 1 & mem_in $end
+$var wire 8 1 mem_rdata [7:0] $end
+$var wire 1 , rst $end
+$var wire 1 # sum_en $end
+$var wire 1 " sum_in $end
+$var wire 1 ! sum_out $end
+$var wire 8 2 sum_to_adder [7:0] $end
+$var wire 8 3 sum_output [7:0] $end
+$var wire 8 4 sum_input [7:0] $end
+$var wire 8 5 mem_wdata [7:0] $end
+$var wire 8 6 mem_to_sum [7:0] $end
+$var wire 8 7 mem_to_adder [7:0] $end
+$var wire 8 8 adder_to_sum [7:0] $end
+$scope module adder $end
+$var wire 8 9 out [7:0] $end
+$var wire 8 : a2 [7:0] $end
+$var wire 8 ; a1 [7:0] $end
+$upscope $end
+$scope module mem_in_demux $end
+$var wire 8 < din [7:0] $end
+$var wire 1 & sel $end
+$var wire 8 = dout1 [7:0] $end
+$var wire 8 > dout0 [7:0] $end
+$upscope $end
+$scope module sum $end
+$var wire 1 ) clk $end
+$var wire 1 # en $end
+$var wire 1 , rst $end
+$var wire 8 ? din [7:0] $end
+$var reg 8 @ dout [7:0] $end
+$upscope $end
+$scope module sum_in_mux $end
+$var wire 8 A din0 [7:0] $end
+$var wire 8 B din1 [7:0] $end
+$var wire 1 " sel $end
+$var wire 8 C dout [7:0] $end
+$upscope $end
+$scope module sum_out_demux $end
+$var wire 8 D din [7:0] $end
+$var wire 1 ! sel $end
+$var wire 8 E dout1 [7:0] $end
+$var wire 8 F dout0 [7:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+bx F
+bx E
+bx D
+bx C
+bx B
+bx A
+bx @
+bx ?
+bx >
+bx =
+bx <
+bx ;
+bx :
+bx 9
+bx 8
+bx 7
+bx 6
+bx 5
+bx 4
+bx 3
+bx 2
+bx 1
+bx 0
+bx /
+bx .
+bx -
+1,
+bx +
+bx *
+0)
+x(
+bx '
+x&
+bx %
+x$
+x#
+x"
+x!
+$end
+#5000
+b0 2
+b0 :
+b0 F
+b0 %
+b0 5
+b0 E
+b0 3
+b0 @
+b0 D
+0,
+1)
+#10000
+b0 8
+b0 9
+b0 B
+b1 4
+b1 ?
+b1 C
+0(
+0&
+1#
+0"
+0!
+0$
+b1000 0
+b1 6
+b1 >
+b1 A
+b0 7
+b0 ;
+b0 =
+b0 '
+b0 /
+b0 .
+b1 +
+b1 1
+b1 <
+b0 *
+b0 -
+1,
+0)
+#15000
+b1 8
+b1 9
+b1 B
+b1 2
+b1 :
+b1 F
+b1 3
+b1 @
+b1 D
+1)
+#20000
+b10 4
+b10 ?
+b10 C
+b0 6
+b0 >
+b0 A
+b10 8
+b10 9
+b10 B
+b1 7
+b1 ;
+b1 =
+1&
+1"
+b11100 0
+b1 '
+b1 /
+b10 .
+0)
+b110 *
+b110 -
+#25000
+b11 4
+b11 ?
+b11 C
+b11 8
+b11 9
+b11 B
+b10 2
+b10 :
+b10 F
+b10 3
+b10 @
+b10 D
+1)
+#30000
+b0 2
+b0 :
+b0 F
+b10 %
+b10 5
+b10 E
+0&
+0#
+0"
+1!
+1$
+b11 0
+b0 4
+b0 ?
+b0 C
+b0 8
+b0 9
+b0 B
+b0 7
+b0 ;
+b0 =
+b11 '
+b11 /
+b1 .
+0)
+b0 +
+b0 1
+b0 <
+b1101 *
+b1101 -
+#35000
+1)
+#40000
+b10 8
+b10 9
+b10 B
+b10 2
+b10 :
+b10 F
+b0 %
+b0 5
+b0 E
+1(
+0!
+0$
+b100000 0
+b0 '
+b0 /
+b11 .
+0)
+b11 *
+b11 -
+#45000
+1)
+#50000
+0)
+#55000
+1)
+#60000
+0)

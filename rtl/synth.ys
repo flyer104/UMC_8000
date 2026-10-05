@@ -1,0 +1,25 @@
+read_verilog core/UMC-8000.v
+read_verilog core/controller.v
+read_verilog core/datapath.v
+read_verilog core/pc.v
+read_verilog core/mod/adder.v
+read_verilog core/mod/mux.v
+read_verilog core/mod/reg.v
+
+hierarchy -check -top UMC_8000
+
+proc                ;
+opt                 ;
+fsm                 ;
+opt
+memory              ;
+opt
+
+techmap             ;
+opt
+
+opt
+stat                ;
+check               ;
+
+write_verilog -noattr UMC_8000_synth.v

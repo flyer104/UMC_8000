@@ -1,0 +1,94 @@
+$date
+	Mon Oct  5 14:10:33 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module controller_tb $end
+$var wire 1 ! sum_out $end
+$var wire 1 " sum_in $end
+$var wire 1 # sum_en $end
+$var wire 1 $ mem_write $end
+$var wire 1 % mem_in $end
+$var wire 6 & mem_addr [5:0] $end
+$var wire 1 ' is_end $end
+$var reg 8 ( instru [7:0] $end
+$scope module controller $end
+$var wire 8 ) instru [7:0] $end
+$var wire 1 ! sum_out $end
+$var wire 1 " sum_in $end
+$var wire 1 # sum_en $end
+$var wire 2 * opcode [1:0] $end
+$var wire 1 $ mem_write $end
+$var wire 1 % mem_in $end
+$var wire 6 + mem_addr [5:0] $end
+$var wire 1 ' is_end $end
+$var reg 6 , code [5:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+bx ,
+bx +
+bx *
+bx )
+bx (
+x'
+bx &
+x%
+x$
+x#
+x"
+x!
+$end
+#10000
+0'
+0%
+1#
+0"
+0!
+0$
+b1000 ,
+b0 &
+b0 +
+b0 *
+b0 (
+b0 )
+#20000
+1'
+0#
+b100000 ,
+b11 *
+b11 (
+b11 )
+#30000
+0'
+1%
+1#
+1"
+b11100 ,
+b1 &
+b1 +
+b10 *
+b110 (
+b110 )
+#40000
+0%
+0#
+0"
+1!
+1$
+b11 ,
+b11 &
+b11 +
+b1 *
+b1101 (
+b1101 )
+#50000
